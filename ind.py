@@ -39,36 +39,36 @@ if __name__ == '__main__':
                 students.sort(key=lambda item: item.get('marks', ''))
 
         elif command == 'list':
-                    # Заголовок таблицы.
-                    line = '+-{}-+-{}-+-{}-+'.format(
-                        '-' * 30,
-                        '-' * 20,
-                        '-' * 8
-                    )
-                    print(line)
+            # Заголовок таблицы.
+            line = '+-{}-+-{}-+-{}-+'.format(
+                '-' * 30,
+                '-' * 20,
+                '-' * 8
+            )
+            print(line)
+            print(
+                '| {:^30} | {:^20} | {:^8} |'.format(
+                    "Ф.И.О.",
+                    "Группа",
+                    "Оценки"
+                )
+            )
+            print(line)
+
+            # Вывести данные о всех студентах.
+            for idx, student in enumerate(students, 1):
+                res = all(int(x) > 3 for x in student['marks'])
+                if res:
                     print(
-                        '| {:^30} | {:^20} | {:^8} |'.format(
-                            "Ф.И.О.",
-                            "Группа",
-                            "Оценки"
+                        '| {:<30} | {:<20} | {:>8} |'.format(
+                            student.get('name', ''),
+                            student.get('groop', ''),
+                            ''.join(student['marks'])
                         )
                     )
-                    print(line)
-
-                    # Вывести данные о всех студентах.
-                    for idx, student in enumerate(students, 1):
-                        res = all(int(x) > 3 for x in student['marks'])
-                        if res:
-                            print(
-                                '| {:<30} | {:<20} | {:>8} |'.format(
-                                    student.get('name', ''),
-                                    student.get('groop', ''),
-                                    ''.join(student['marks'])
-                                )
-                            )
-                        else:
-                            print("Таких студентов нет")
-                    print(line)
+                else:
+                    print("Таких студентов нет")
+            print(line)
 
         elif command == 'help':
             # Вывести справку о работе с программой.
