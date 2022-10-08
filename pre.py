@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import datetime
+
 import sys
 from datetime import date
 
@@ -66,34 +66,3 @@ if __name__ == '__main__':
                     )
                 )
             print(line)
-        elif command.startswith('select '):
-            # Получить текущую дату.
-            today = date.today()
-            # Разбить команду на части для выделения номера года.
-            parts = command.split(' ', maxsplit=1)
-            # Получить требуемый стаж.
-            period = int(parts[1])
-            # Инициализировать счетчик.
-            count = 0
-            # Проверить сведения работников из списка.
-            for worker in workers:
-                if today.year - worker.get('year', today.year) >= period:
-                    count += 1
-                    print(
-                        '{:>4}: {}'.format(count, worker.get('name', ''))
-                    )
-            # Если счетчик равен 0, то работники не найдены.
-            if count == 0:
-                print("Работники с заданным стажем не найдены.")
-        elif command == 'help':
-            # Вывести справку о работе с программой.
-            print("Список команд:\n")
-            print("add - добавить работника;")
-            print("list - вывести список работников;")
-            print("select <стаж> - запросить работников со стажем;")
-            print("help - отобразить справку;")
-            print("exit - завершить работу с программой.")
-            year = date.today().year
-            print(year)
-        else:
-            print(f"Неизвестная команда {command}", file=sys.stderr)
